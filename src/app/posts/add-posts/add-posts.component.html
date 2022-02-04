@@ -1,0 +1,27 @@
+<h2 mat-dialog-title>Agregar Publicación</h2>
+<mat-dialog-content class="mat-typography">
+  <div class="row">
+    <div class="col-md-12">
+      <form autocomplete="off" [formGroup]="postForm">
+        <div class="form-group">
+          <mat-form-field appearance="outline" class="example-full-width">
+            <mat-label>Titulo</mat-label>
+            <input matInput placeholder="Digitar titulo" formControlName="titulo">
+            <mat-error>El titulo es requerido</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="form-group">
+          <mat-form-field appearance="outline" class="example-full-width">
+            <mat-label>Descripción</mat-label>
+            <textarea matInput placeholder="Digitar descripción" formControlName="descripcion"></textarea>
+            <mat-error>La descripción es requerida</mat-error>
+          </mat-form-field>
+        </div>
+      </form>
+    </div>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cerrar</button>
+  <button class="btn btn-primary" [disabled]="postForm.invalid">Publicar</button>
+</mat-dialog-actions>
