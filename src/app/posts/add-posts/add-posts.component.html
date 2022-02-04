@@ -23,5 +23,8 @@
 </mat-dialog-content>
 <mat-dialog-actions align="end">
   <button mat-button mat-dialog-close>Cerrar</button>
-  <button class="btn btn-primary" [disabled]="postForm.invalid">Publicar</button>
+  <button class="btn btn-primary" [disabled]="postForm.invalid" (click)="publicar()">
+    <span *ngIf="!data.editar">Publicar</span>
+    <span *ngIf="data.editar">Editar</span>
+  </button>
 </mat-dialog-actions>

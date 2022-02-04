@@ -14,7 +14,7 @@ export const InitState: PostsState = {
     {
       id: '2',
       title: 'simple title 2',
-      description: 'Simple Descripcion 12',
+      description: 'Simple Descripcion 2',
     },
   ],
 };

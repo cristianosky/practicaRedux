@@ -20,9 +20,13 @@ export class PostsListComponent implements OnInit {
     this.posts$ = this.store.select(getPosts);
   }
 
-  abrirmodal() {
+  abrirmodal(cod: any, editar: boolean) {
     const dialog = this.dialog.open(AddPostsComponent, {
       width: '500px',
+      data: {
+        cod: cod,
+        editar: editar,
+      },
     });
   }
 }
