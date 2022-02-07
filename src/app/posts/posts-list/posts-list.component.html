@@ -20,6 +20,7 @@
           <td>{{post.description}}</td>
           <td>
             <button class="btn btn-warning" (click)="abrirmodal(post.id, true)">Editar</button>
+            <button class="btn btn-danger" style="margin-left: 5px;" (click)="eliminar(post.id)">Eliminar</button>
           </td>
         </tr>
       </tbody>

@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { Post } from 'src/app/model/posts.model';
 import { AppState } from 'src/app/store/app.state';
 import { AddPostsComponent } from '../add-posts/add-posts.component';
+import { deletePost } from '../state/posts.actions';
 import { getPosts } from '../state/posts.selectors';
 
 @Component({
@@ -28,5 +29,11 @@ export class PostsListComponent implements OnInit {
         editar: editar,
       },
     });
+  }
+
+  eliminar(id: string) {
+    if (confirm('Seguro que desea elimnar esta informacion')) {
+      this.store.dispatch(deletePost({ id }));
+    }
   }
 }

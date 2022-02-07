@@ -8,7 +8,7 @@ import {
 import { Store } from '@ngrx/store';
 import { Post } from 'src/app/model/posts.model';
 import { AppState } from 'src/app/store/app.state';
-import { addPost } from '../state/posts.actions';
+import { addPost, updatePost } from '../state/posts.actions';
 import { getPostById } from '../state/posts.selectors';
 
 @Component({
@@ -18,7 +18,7 @@ import { getPostById } from '../state/posts.selectors';
 })
 export class AddPostsComponent implements OnInit {
   postForm!: FormGroup;
-  codEditar!: number;
+  codEditar!: any;
 
   constructor(
     private fb: FormBuilder,
@@ -42,16 +42,25 @@ export class AddPostsComponent implements OnInit {
 
   publicar() {
     if (this.postForm.invalid) return;
-    console.log('entro');
-    // debugger;
-    const post: Post = {
-      title: this.postForm.get('titulo')?.value,
-      description: this.postForm.get('descripcion')?.value,
-    };
+    if (!this.data.editar) {
+      const post: Post = {
+        title: this.postForm.get('titulo')?.value,
+        description: this.postForm.get('descripcion')?.value,
+      };
 
-    this.store.dispatch(addPost({ post }));
+      this.store.dispatch(addPost({ post }));
 
-    this.postForm.reset();
+      this.postForm.reset();
+    } else {
+      const post: Post = {
+        id: this.codEditar,
+        title: this.postForm.get('titulo')?.value,
+        description: this.postForm.get('descripcion')?.value,
+      };
+
+      this.store.dispatch(updatePost({ post }));
+    }
+    this.dialog.closeAll();
   }
 
   geteditar(cod: any) {
