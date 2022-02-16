@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Store } from '@ngrx/store';
+import { AppState } from 'src/app/store/app.state';
+import { loginStrar } from './state/auth.actions';
 
 @Component({
   selector: 'app-auth',
@@ -9,7 +12,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class AuthComponent implements OnInit {
   authForms!: FormGroup;
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private store: Store<AppState>) {}
 
   ngOnInit(): void {
     this.iniform();
@@ -23,6 +26,7 @@ export class AuthComponent implements OnInit {
   }
 
   ingresar() {
-    console.log(this.authForms.value);
+    const { email, password } = this.authForms.value;
+    this.store.dispatch(loginStrar({ email, password }));
   }
 }
