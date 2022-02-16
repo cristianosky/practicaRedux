@@ -1,0 +1,28 @@
+<div class="container mt-3">
+  <div class="row">
+    <div class="col-md-6 offset-md-3">
+      <h3>Login</h3>
+      <hr>
+      <form autocomplete="off" [formGroup]="authForms">
+        <div class="mb-3">
+          <mat-form-field appearance="outline" class="example-full-width">
+            <mat-label>Correo</mat-label>
+            <input matInput placeholder="Digitar Correo" formControlName="email">
+            <mat-error>El correo es requerido</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="mb-3">
+          <mat-form-field appearance="outline" class="example-full-width">
+            <mat-label>Contraseña</mat-label>
+            <input matInput placeholder="Digitar Contraseña" formControlName="password">
+            <mat-error>La contraseña es requerido</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="mb-3 text-center">
+          <button type="button" class="btn btn-outline-primary" style="width: 41%;" (click)="ingresar()"
+            [disabled]="authForms.invalid">Ingresar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

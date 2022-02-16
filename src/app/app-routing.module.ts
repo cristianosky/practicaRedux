@@ -11,6 +11,7 @@ const routes: Routes = [
     path: 'posts',
     component: PostsListComponent,
   },
+  { path: 'auth', loadChildren: () => import('./core/auth/auth.module').then(m => m.AuthModule) },
   { path: '**', redirectTo: 'inicio' },
 ];
 
