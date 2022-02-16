@@ -1,14 +1,11 @@
-import { contadorReducer } from '../contador/state/contador.reducer';
-import { ContadorState } from '../contador/state/contador.state';
-import { postsReducer } from '../posts/state/posts.reducer';
-import { PostsState } from '../posts/state/posts.state';
+import { SharedReducer } from '../shared/store/shared.reducer';
+import { SHARED_STATE_NAME } from '../shared/store/shared.selectors';
+import { SharedState } from '../shared/store/shared.state';
 
 export interface AppState {
-  contador: ContadorState;
-  posts: PostsState;
+  [SHARED_STATE_NAME]: SharedState;
 }
 
 export const appReducer = {
-  contador: contadorReducer,
-  posts: postsReducer,
+  [SHARED_STATE_NAME]: SharedReducer,
 };
