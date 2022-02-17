@@ -6,7 +6,7 @@ import {
   SET_LOADING_ACTION,
 } from 'src/app/shared/store/shared.actions';
 import { AppState } from 'src/app/store/app.state';
-import { loginStrar } from './state/auth.actions';
+import { loginStrar, registeStart } from './state/auth.actions';
 
 @Component({
   selector: 'app-auth',
@@ -15,6 +15,7 @@ import { loginStrar } from './state/auth.actions';
 })
 export class AuthComponent implements OnInit {
   authForms!: FormGroup;
+  SignForms!: FormGroup;
 
   constructor(private fb: FormBuilder, private store: Store<AppState>) {}
 
@@ -27,11 +28,23 @@ export class AuthComponent implements OnInit {
       email: ['', [Validators.required]],
       password: ['', [Validators.required]],
     });
+
+    this.SignForms = this.fb.group({
+      email: ['', [Validators.required]],
+      password: ['', [Validators.required]],
+    });
   }
 
   ingresar() {
     this.store.dispatch(setLoadingSpinner({ status: true }));
     const { email, password } = this.authForms.value;
     this.store.dispatch(loginStrar({ email, password }));
+  }
+
+  registrar() {
+    this.store.dispatch(setLoadingSpinner({ status: true }));
+    const { email, password } = this.SignForms.value;
+
+    this.store.dispatch(registeStart({ email, password }));
   }
 }

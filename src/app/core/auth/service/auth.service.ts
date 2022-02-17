@@ -33,8 +33,8 @@ export class AuthService {
     return user;
   }
 
-  register(email: string, password: string) {
-    return this.http.post(
+  register(email: string, password: string): Observable<RespondeData> {
+    return this.http.post<RespondeData>(
       `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${this.key}`,
       { email, password, returnSecureToken: true }
     );
@@ -53,8 +53,32 @@ export class AuthService {
       case 'USER_DISABLED':
         return 'Usuario desactivado';
         break;
+
+      case 'EMAIL_EXISTS':
+        return 'El correo ya existe';
+        break;
+
       default:
         return;
     }
+  }
+
+  setLocalStorage(user: User) {
+    localStorage.setItem('userDta', JSON.stringify(user));
+  }
+
+  getUserLocalStorage() {
+    const userDataString = localStorage.getItem('userDta');
+    if (userDataString) {
+      const UserData = JSON.parse(userDataString);
+      const expirationDte = new Date(UserData.expirationDate);
+      const user = new User(
+        UserData.email,
+        UserData.token,
+        UserData.localId,
+        expirationDte
+      );
+    }
+    return null;
   }
 }

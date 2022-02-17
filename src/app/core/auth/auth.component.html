@@ -1,29 +1,56 @@
-<div class="container mt-3">
-  <div class="row">
-    <div class="col-md-6 offset-md-3">
-      <h3>Login</h3>
-      <hr>
-      <form autocomplete="off" [formGroup]="authForms">
-        <div class="mb-3">
-          <mat-form-field appearance="outline" class="example-full-width">
-            <mat-label>Correo</mat-label>
-            <input matInput placeholder="Digitar Correo" formControlName="email">
-            <mat-error>El correo es requerido</mat-error>
-          </mat-form-field>
+<div class="degradado">
+  <div class="container">
+    <div class="row">
+      <div class="">
+        <div class="col-6 offset-md-6 conlogin">
+          <mat-tab-group mat-align-tabs="group">
+            <mat-tab label="Ingresar">
+              <form autocomplete="off" [formGroup]="authForms" class="mt-2">
+                <div class="mb-3">
+                  <mat-form-field appearance="outline" class="example-full-width">
+                    <mat-label>Correo</mat-label>
+                    <input matInput placeholder="Digitar Correo" formControlName="email">
+                    <mat-error>El correo es requerido</mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="mb-3">
+                  <mat-form-field appearance="outline" class="example-full-width">
+                    <mat-label>Contraseña</mat-label>
+                    <input matInput type="password" placeholder="Digitar Contraseña" formControlName="password">
+                    <mat-error>La contraseña es requerido</mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="mb-3 text-center">
+                  <button type="button" class="btn btn-outline-primary" style="width: 41%;" (click)="ingresar()"
+                    [disabled]="authForms.invalid">Ingresar</button>
+                </div>
+              </form>
+            </mat-tab>
+            <mat-tab label="Registrar">
+              <form autocomplete="off" [formGroup]="SignForms" class="mt-2">
+                <div class="mb-3">
+                  <mat-form-field appearance="outline" class="example-full-width">
+                    <mat-label>Correo</mat-label>
+                    <input matInput placeholder="Digitar Correo" formControlName="email">
+                    <mat-error>El correo es requerido</mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="mb-3">
+                  <mat-form-field appearance="outline" class="example-full-width">
+                    <mat-label>Contraseña</mat-label>
+                    <input matInput type="password" placeholder="Digitar Contraseña" formControlName="password">
+                    <mat-error>La contraseña es requerido</mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="mb-3 text-center">
+                  <button type="button" class="btn btn-outline-primary" style="width: 41%;" (click)="registrar()"
+                    [disabled]="SignForms.invalid">Registrar</button>
+                </div>
+              </form>
+            </mat-tab>
+          </mat-tab-group>
         </div>
-        <div class="mb-3">
-          <mat-form-field appearance="outline" class="example-full-width">
-            <mat-label>Contraseña</mat-label>
-            <input matInput placeholder="Digitar Contraseña" formControlName="password">
-            <mat-error>La contraseña es requerido</mat-error>
-          </mat-form-field>
-        </div>
-        <div class="mb-3 text-center">
-          <button type="button" class="btn btn-outline-primary" style="width: 41%;" (click)="ingresar()"
-            [disabled]="authForms.invalid">Ingresar <i class="fa-light fa-spinner"></i></button>
-        </div>
-        <i class="fa-light fa-spinner"></i>
-      </form>
+      </div>
     </div>
   </div>
 </div>

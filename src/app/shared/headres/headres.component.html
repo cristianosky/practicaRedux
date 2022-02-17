@@ -21,10 +21,6 @@
             *ngIf="!(isAuth |async)">Login</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" [routerLink]="['/auth/signup']" [routerLinkActive]="['active']"
-            *ngIf="!(isAuth |async)">Signup</a>
-        </li>
-        <li class="nav-item">
           <a class="nav-link" [routerLinkActive]="['active']" *ngIf="isAuth |async">Logout</a>
         </li>
       </ul>

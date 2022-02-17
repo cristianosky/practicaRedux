@@ -10,6 +10,8 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { EffectsModule } from '@ngrx/effects';
 import { AuthEffects } from './state/auth.effects';
 import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzTabsModule } from 'ng-zorro-antd/tabs';
+import { MatTabsModule } from '@angular/material/tabs';
 
 @NgModule({
   declarations: [AuthComponent],
@@ -22,6 +24,8 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
     NzButtonModule,
     MatFormFieldModule,
     MatDialogModule,
+    NzTabsModule,
+    MatTabsModule,
     EffectsModule.forFeature([AuthEffects]),
   ],
 })
