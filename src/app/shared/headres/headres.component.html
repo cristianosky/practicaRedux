@@ -17,10 +17,15 @@
           <a class="nav-link" [routerLink]="['/posts']" [routerLinkActive]="['active']">Posts</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" [routerLink]="['/auth']" [routerLinkActive]="['active']">Login</a>
+          <a class="nav-link" [routerLink]="['/auth']" [routerLinkActive]="['active']"
+            *ngIf="!(isAuth |async)">Login</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" [routerLink]="['/auth/signup']" [routerLinkActive]="['active']">Signup</a>
+          <a class="nav-link" [routerLink]="['/auth/signup']" [routerLinkActive]="['active']"
+            *ngIf="!(isAuth |async)">Signup</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLinkActive]="['active']" *ngIf="isAuth |async">Logout</a>
         </li>
       </ul>
     </div>

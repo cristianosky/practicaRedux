@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
+import {
+  setLoadingSpinner,
+  SET_LOADING_ACTION,
+} from 'src/app/shared/store/shared.actions';
 import { AppState } from 'src/app/store/app.state';
 import { loginStrar } from './state/auth.actions';
 
@@ -26,6 +30,7 @@ export class AuthComponent implements OnInit {
   }
 
   ingresar() {
+    this.store.dispatch(setLoadingSpinner({ status: true }));
     const { email, password } = this.authForms.value;
     this.store.dispatch(loginStrar({ email, password }));
   }

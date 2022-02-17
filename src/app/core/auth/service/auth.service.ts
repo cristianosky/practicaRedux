@@ -39,4 +39,22 @@ export class AuthService {
       { email, password, returnSecureToken: true }
     );
   }
+
+  getErrorMensaje(mensaje: string) {
+    switch (mensaje) {
+      case 'EMAIL_NOT_FOUND':
+        return 'Correo no registrado';
+        break;
+
+      case 'INVALID_PASSWORD':
+        return 'Contraseña incorrecta';
+        break;
+
+      case 'USER_DISABLED':
+        return 'Usuario desactivado';
+        break;
+      default:
+        return;
+    }
+  }
 }

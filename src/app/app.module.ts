@@ -21,6 +21,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { CargandoComponent } from './shared/cargando/cargando.component';
 import { HeadresComponent } from './shared/headres/headres.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { HeadresComponent } from './shared/headres/headres.component';
     MatInputModule,
     MatButtonModule,
     MatFormFieldModule,
+    MatProgressSpinnerModule,
     NzIconModule,
     MatDialogModule,
     HttpClientModule,

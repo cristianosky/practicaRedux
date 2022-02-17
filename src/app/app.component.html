@@ -1,2 +1,8 @@
 <app-headres></app-headres>
+<app-cargando *ngIf="showLoafing|async"></app-cargando>
+<div class="error" *ngIf="mensajeError | async as error">
+  <div class="alert alert-danger" role="alert" style="width: 250px;">
+    {{error}}
+  </div>
+</div>
 <router-outlet></router-outlet>
