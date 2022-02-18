@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
+import { authLogout } from 'src/app/core/auth/state/auth.actions';
 import { isAuthenticated } from 'src/app/core/auth/state/auth.selectors';
 import { AppState } from 'src/app/store/app.state';
 
@@ -16,5 +17,10 @@ export class HeadresComponent implements OnInit {
 
   ngOnInit(): void {
     this.isAuth = this.store.select(isAuthenticated);
+  }
+
+  salir(event: Event) {
+    event.preventDefault();
+    this.store.dispatch(authLogout());
   }
 }

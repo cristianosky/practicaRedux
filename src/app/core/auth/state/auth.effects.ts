@@ -2,6 +2,7 @@ import { catchError, exhaustMap, map, mergeMap, tap } from 'rxjs/operators';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Injectable } from '@angular/core';
 import {
+  authLogout,
   autoLogin,
   loginStrar,
   registeStart,
@@ -38,7 +39,7 @@ export class AuthEffects {
             this.store.dispatch(setErrorMensaje({ mensaje: '' }));
             const user = this._authService.formatUser(data);
             this._authService.setLocalStorage(user);
-            return loginSuccess({ user });
+            return loginSuccess({ user, redireccion: true });
           }),
           catchError((errResp) => {
             this.store.dispatch(setLoadingSpinner({ status: false }));
@@ -58,7 +59,9 @@ export class AuthEffects {
       return this.actions$.pipe(
         ofType(...[loginSuccess, registeSuccess]),
         tap((action) => {
-          this.router.navigate(['/inicio']);
+          if (action.redireccion) {
+            this.router.navigate(['/inicio']);
+          }
         })
       );
     },
@@ -75,7 +78,7 @@ export class AuthEffects {
             this.store.dispatch(setErrorMensaje({ mensaje: '' }));
             const user = this._authService.formatUser(data);
             this._authService.setLocalStorage(user);
-            return registeSuccess({ user });
+            return registeSuccess({ user, redireccion: true });
           }),
           catchError((errResp) => {
             this.store.dispatch(setLoadingSpinner({ status: false }));
@@ -90,9 +93,26 @@ export class AuthEffects {
     );
   });
 
-  // autoLogin$ = createEffect(()=>{
-  //   return this.actions$.pipe(ofType(autoLogin), mergeMap((action)=>{
-  //     const user = this._authService.getUserLocalStorage();
-  //   }))
-  // })
+  autoLogin$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(autoLogin),
+      mergeMap((action) => {
+        const user: any = this._authService.getUserLocalStorage();
+        return of(loginSuccess({ user: user, redireccion: false }));
+      })
+    );
+  });
+
+  logout$ = createEffect(
+    () => {
+      return this.actions$.pipe(
+        ofType(authLogout),
+        map((action) => {
+          this._authService.logout();
+          this.router.navigate(['auth']);
+        })
+      );
+    },
+    { dispatch: false }
+  );
 }

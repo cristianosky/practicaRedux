@@ -21,7 +21,8 @@
             *ngIf="!(isAuth |async)">Login</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" [routerLinkActive]="['active']" *ngIf="isAuth |async">Logout</a>
+          <a class="nav-link" [routerLinkActive]="['active']" style="cursor: pointer;" *ngIf="isAuth |async"
+            (click)="salir($event)">Logout</a>
         </li>
       </ul>
     </div>

@@ -22,6 +22,7 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
 import { CargandoComponent } from './shared/cargando/cargando.component';
 import { HeadresComponent } from './shared/headres/headres.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { AuthEffects } from './core/auth/state/auth.effects';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     NzIconModule,
     MatDialogModule,
     HttpClientModule,
-    EffectsModule.forRoot([]),
+    EffectsModule.forRoot([AuthEffects]),
     StoreModule.forRoot(appReducer),
     StoreDevtoolsModule.instrument({
       logOnly: environment.production,

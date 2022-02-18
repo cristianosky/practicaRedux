@@ -13,6 +13,8 @@ export const REGISTER_FAIL = '[auth page] register fail';
 
 export const AUTO_LOGIN_ACTION = '[auth pague] auto login';
 
+export const LOGOUT_ACTION = '[auth page] logout';
+
 export const loginStrar = createAction(
   LOGIN_START,
   props<{ email: any; password: any }>()
@@ -20,7 +22,7 @@ export const loginStrar = createAction(
 
 export const loginSuccess = createAction(
   LOGIN_SUCCESS,
-  props<{ user: User }>()
+  props<{ user: User; redireccion: boolean }>()
 );
 
 export const registeStart = createAction(
@@ -30,7 +32,9 @@ export const registeStart = createAction(
 
 export const registeSuccess = createAction(
   REGISTER_SUCCESS,
-  props<{ user: User }>()
+  props<{ user: User; redireccion: boolean }>()
 );
 
 export const autoLogin = createAction(AUTO_LOGIN_ACTION);
+
+export const authLogout = createAction(LOGOUT_ACTION);

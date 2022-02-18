@@ -1,17 +1,21 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
+import { AppState } from 'src/app/store/app.state';
 import { environment } from 'src/environments/environment';
 import { RespondeData } from '../model/Auth.model';
 import { User } from '../model/user.model';
+import { authLogout } from '../state/auth.actions';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
   key: string = environment.key_firebase;
+  timeoutInterval: any;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private store: Store<AppState>) {}
 
   login(email: string, password: string): Observable<RespondeData> {
     return this.http.post<RespondeData>(
@@ -65,6 +69,7 @@ export class AuthService {
 
   setLocalStorage(user: User) {
     localStorage.setItem('userDta', JSON.stringify(user));
+    this.iniciarTimeOutInterval(user);
   }
 
   getUserLocalStorage() {
@@ -78,7 +83,27 @@ export class AuthService {
         UserData.localId,
         expirationDte
       );
+      this.iniciarTimeOutInterval(user);
+      return user;
     }
     return null;
+  }
+
+  iniciarTimeOutInterval(user: User) {
+    const todaysDate = new Date().getTime();
+    const expirationDate = user.expireDate.getTime();
+    const timeInterval = expirationDate - todaysDate;
+
+    this.timeoutInterval = setTimeout(() => {
+      this.store.dispatch(authLogout());
+    }, timeInterval);
+  }
+
+  logout() {
+    localStorage.removeItem('userDta');
+    if (this.timeoutInterval) {
+      clearTimeout(this.timeoutInterval);
+      this.timeoutInterval = null;
+    }
   }
 }
