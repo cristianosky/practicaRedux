@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ContadorComponent } from './contador/contador.component';
 import { InicioComponent } from './inicio/inicio.component';
+import { AuthGuard } from './services/Auth.guard';
 
 const routes: Routes = [
   { path: 'inicio', component: InicioComponent },
@@ -15,6 +16,7 @@ const routes: Routes = [
     path: 'posts',
     loadChildren: () =>
       import('./core/posts/posts.module').then((m) => m.PostsModule),
+    canActivate: [AuthGuard],
   },
   { path: '**', redirectTo: 'inicio' },
 ];

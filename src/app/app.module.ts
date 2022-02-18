@@ -15,12 +15,14 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { EffectsModule } from '@ngrx/effects';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { CargandoComponent } from './shared/cargando/cargando.component';
 import { HeadresComponent } from './shared/headres/headres.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { AuthEffects } from './core/auth/state/auth.effects';
+import { AuthTokenInterceptor } from './services/AuthInterceptor';
+import { StoreRouterConnectingModule } from '@ngrx/router-store';
 
 @NgModule({
   declarations: [
@@ -49,8 +51,15 @@ import { AuthEffects } from './core/auth/state/auth.effects';
       maxAge: 25,
     }),
     BrowserAnimationsModule,
+    StoreRouterConnectingModule.forRoot(),
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthTokenInterceptor,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
