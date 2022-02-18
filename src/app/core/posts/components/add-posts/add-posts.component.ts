@@ -8,8 +8,8 @@ import {
 import { Store } from '@ngrx/store';
 import { Post } from 'src/app/model/posts.model';
 import { AppState } from 'src/app/store/app.state';
-import { addPost, updatePost } from '../state/posts.actions';
-import { getPostById } from '../state/posts.selectors';
+import { addPost, updatePost } from '../../state/posts.actions';
+import { getPostById } from '../../state/posts.selectors';
 
 @Component({
   selector: 'app-add-posts',

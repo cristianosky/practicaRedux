@@ -6,12 +6,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ContadorComponent } from './contador/contador.component';
 import { InicioComponent } from './inicio/inicio.component';
-import { PostsListComponent } from './posts/posts-list/posts-list.component';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from 'src/environments/environment.prod';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { appReducer } from './store/app.state';
-import { AddPostsComponent } from './posts/add-posts/add-posts.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -29,8 +27,6 @@ import { AuthEffects } from './core/auth/state/auth.effects';
     AppComponent,
     ContadorComponent,
     InicioComponent,
-    PostsListComponent,
-    AddPostsComponent,
     CargandoComponent,
     HeadresComponent,
   ],
