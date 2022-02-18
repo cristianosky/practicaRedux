@@ -23,6 +23,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { AuthEffects } from './core/auth/state/auth.effects';
 import { AuthTokenInterceptor } from './services/AuthInterceptor';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
+import { CustomSerializer } from './store/router/custom-serializer';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,9 @@ import { StoreRouterConnectingModule } from '@ngrx/router-store';
       maxAge: 25,
     }),
     BrowserAnimationsModule,
-    StoreRouterConnectingModule.forRoot(),
+    StoreRouterConnectingModule.forRoot({
+      serializer: CustomSerializer,
+    }),
   ],
   providers: [
     {
